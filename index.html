@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta
+    name="description"
+    content="SquadMaker te ayuda a crear equipos balanceados, organizar jugadores, guardar listas y compartir resultados fácilmente."
+  />
+
+  <meta
+    name="keywords"
+    content="SquadMaker, crear equipos, equipos aleatorios, organizar partidos, pádel, fútbol, voleibol, básquetbol"
+  />
+
+  <meta name="author" content="SquadMaker" />
+
+  <meta name="theme-color" content="#31106c" />
+
+  <title>SquadMaker | Organiza tus equipos en segundos</title>
+
+  <link rel="icon" type="image/png" href="logo-squadmaker.png" />
+
+  <style>
+    :root {
+      --morado: #32106f;
+      --morado-oscuro: #1b073f;
+      --morado-claro: #7a55c5;
+      --azul: #2694ed;
+      --azul-claro: #eaf6ff;
+      --amarillo: #ffc21c;
+      --naranja: #ff9700;
+      --verde: #19a974;
+      --blanco: #ffffff;
+      --gris-claro: #f5f6fb;
+      --gris: #667085;
+      --texto: #1f1b2d;
+      --sombra: 0 18px 50px rgba(48, 16, 111, 0.16);
+      --radio: 26px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      background: var(--blanco);
+      color: var(--texto);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .contenedor {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .barra-superior {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(49, 16, 108, 0.08);
+    }
+
+    .navegacion {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .marca {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--morado);
+    }
+
+    .marca img {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-weight: 700;
+      color: #43365c;
+    }
+
+    .menu a {
+      transition: 0.2s ease;
+    }
+
+    .menu a:hover {
+      color: var(--naranja);
+    }
+
+    .boton {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 24px;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 800;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .boton:hover {
+      transform: translateY(-3px);
+    }
+
+    .boton-principal {
+      background: linear-gradient(135deg, var(--naranja), var(--amarillo));
+      color: #301354;
+      box-shadow: 0 12px 30px rgba(255, 151, 0, 0.3);
+    }
+
+    .boton-secundario {
+      background: var(--blanco);
+      color: var(--morado);
+      border: 2px solid rgba(49, 16, 108, 0.15);
+    }
+
+    .hero {
+      position: relative;
+      padding: 74px 0 64px;
+      background:
+        radial-gradient(circle at 10% 15%, rgba(255, 194, 28, 0.25), transparent 24%),
+        radial-gradient(circle at 88% 12%, rgba(38, 148, 237, 0.24), transparent 30%),
+        linear-gradient(135deg, #ffffff 0%, #f7f3ff 55%, #eef8ff 100%);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      right: -170px;
+      top: -130px;
+      background: linear-gradient(
+        135deg,
+        rgba(38, 148, 237, 0.18),
+        rgba(122, 85, 197, 0.13)
+      );
+    }
+
+    .hero-contenido {
+      position: relative;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: center;
+      gap: 54px;
+    }
+
+    .etiqueta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(49, 16, 108, 0.08);
+      color: var(--morado);
+      border: 1px solid rgba(49, 16, 108, 0.1);
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 0.91rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 6vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      color: var(--morado);
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--naranja);
+    }
+
+    .hero p {
+      max-width: 650px;
+      font-size: 1.17rem;
+      color: #514765;
+      margin-bottom: 30px;
+    }
+
+    .hero-botones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-visual img {
+      width: 100%;
+      border-radius: 30px;
+      box-shadow: var(--sombra);
+      border: 6px solid rgba(255, 255, 255, 0.78);
+    }
+
+    .estadisticas {
+      margin-top: -28px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .estadisticas-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--blanco);
+      border-radius: 24px;
+      box-shadow: var(--sombra);
+      overflow: hidden;
+      border: 1px solid rgba(49, 16, 108, 0.08);
+    }
+
+    .estadistica {
+      padding: 26px 20px;
+      text-align: center;
+      border-right: 1px solid rgba(49, 16, 108, 0.09);
+    }
+
+    .estadistica:last-child {
+      border-right: none;
+    }
+
+    .estadistica strong {
+      display: block;
+      color: var(--morado);
+      font-size: 1.65rem;
+      font-weight: 900;
+    }
+
+    .estadistica span {
+      color: var(--gris);
+      font-size: 0.92rem;
+    }
+
+    section {
+      padding: 90px 0;
+    }
+
+    .titulo-seccion {
+      max-width: 730px;
+      margin: 0 auto 48px;
+      text-align: center;
+    }
+
+    .titulo-seccion small {
+      display: block;
+      color: var(--naranja);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+    }
+
+    .titulo-seccion h2 {
+      color: var(--morado);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.1;
+      margin-bottom: 15px;
+    }
+
+    .titulo-seccion p {
+      color: var(--gris);
+      font-size: 1.08rem;
+    }
+
+    .funciones {
+      background: var(--gris-claro);
+    }
+
+    .funciones-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .tarjeta {
+      background: var(--blanco);
+      border-radius: var(--radio);
+      padding: 30px;
+      box-shadow: 0 10px 35px rgba(48, 16, 111, 0.08);
+      border: 1px solid rgba(49, 16, 108, 0.07);
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .tarjeta:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 18px 45px rgba(48, 16, 111, 0.14);
+    }
+
+    .icono {
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #f0e9ff, #fff3ce);
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .tarjeta h3 {
+      color: var(--morado);
+      font-size: 1.28rem;
+      margin-bottom: 9px;
+    }
+
+    .tarjeta p {
+      color: var(--gris);
+    }
+
+    .como-funciona {
+      background: var(--blanco);
+    }
+
+    .pasos {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .paso {
+      position: relative;
+      text-align: center;
+      padding: 28px 20px;
+    }
+
+    .numero {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 18px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--morado);
+      color: var(--amarillo);
+      font-weight: 900;
+      font-size: 1.25rem;
+      box-shadow: 0 10px 24px rgba(49, 16, 108, 0.24);
+    }
+
+    .paso h3 {
+      color: var(--morado);
+      margin-bottom: 8px;
+    }
+
+    .paso p {
+      color: var(--gris);
+      font-size: 0.95rem;
+    }
+
+    .deportes {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(49, 16, 108, 0.98),
+          rgba(75, 27, 139, 0.96)
+        );
+      color: var(--blanco);
+    }
+
+    .deportes .titulo-seccion h2,
+    .deportes .titulo-seccion p {
+      color: var(--blanco);
+    }
+
+    .deportes-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+
+    .deporte {
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 22px;
+      text-align: center;
+      padding: 24px 14px;
+      font-weight: 800;
+      backdrop-filter: blur(8px);
+    }
+
+    .deporte span {
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 9px;
+    }
+
+    .cta {
+      padding: 100px 0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 194, 28, 0.25), transparent 25%),
+        linear-gradient(135deg, #f7f2ff, #eef8ff);
+    }
+
+    .cta-caja {
+      display: grid;
+      grid-template-columns: 0.65fr 1.35fr;
+      gap: 44px;
+      align-items: center;
+      background: var(--blanco);
+      border-radius: 34px;
+      padding: 50px;
+      box-shadow: var(--sombra);
+      border: 1px solid rgba(49, 16, 108, 0.08);
+    }
+
+    .cta-logo {
+      max-width: 300px;
+      margin: 0 auto;
+      filter: drop-shadow(0 18px 26px rgba(48, 16, 111, 0.18));
+    }
+
+    .cta h2 {
+      color: var(--morado);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.08;
+      margin-bottom: 16px;
+    }
+
+    .cta p {
+      color: var(--gris);
+      font-size: 1.06rem;
+      margin-bottom: 26px;
+    }
+
+    footer {
+      background: var(--morado-oscuro);
+      color: rgba(255, 255, 255, 0.82);
+      padding: 52px 0 28px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 38px;
+    }
+
+    .footer-marca {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--blanco);
+      font-size: 1.25rem;
+      font-weight: 900;
+      margin-bottom: 15px;
+    }
+
+    .footer-marca img {
+      width: 62px;
+      height: 62px;
+      object-fit: contain;
+    }
+
+    footer h3 {
+      color: var(--blanco);
+      margin-bottom: 14px;
+    }
+
+    footer a {
+      display: block;
+      margin-bottom: 8px;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: var(--amarillo);
+    }
+
+    .pie-final {
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 960px) {
+      .hero-contenido,
+      .cta-caja {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-texto {
+        text-align: center;
+      }
+
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-botones {
+        justify-content: center;
+      }
+
+      .funciones-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pasos {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .deportes-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .contenedor {
+        width: min(100% - 26px, 1180px);
+      }
+
+      .menu {
+        display: none;
+      }
+
+      .navegacion .boton {
+        min-height: 44px;
+        padding: 0 15px;
+        font-size: 0.86rem;
+      }
+
+      .marca span {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 48px;
+      }
+
+      .hero-contenido {
+        gap: 35px;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .estadisticas-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .estadistica {
+        border-bottom: 1px solid rgba(49, 16, 108, 0.09);
+      }
+
+      section {
+        padding: 70px 0;
+      }
+
+      .funciones-grid,
+      .pasos,
+      .deportes-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-caja {
+        padding: 30px 22px;
+        text-align: center;
+      }
+
+      .pie-final {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="barra-superior">
+    <div class="contenedor navegacion">
+      <a href="#inicio" class="marca">
+        <img src="logo-squadmaker.png" alt="Logo de SquadMaker" />
+        <span>SquadMaker</span>
+      </a>
+
+      <nav class="menu" aria-label="Navegación principal">
+        <a href="#funciones">Funciones</a>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#deportes">Deportes</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <!-- CAMBIA ESTE ENLACE CUANDO TENGAS LA URL DEFINITIVA DE GOOGLE PLAY -->
+      <a
+        class="boton boton-principal"
+        href="https://play.google.com/store"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Descargar app
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="contenedor hero-contenido">
+        <div class="hero-texto">
+          <div class="etiqueta">
+            ⚡ Equipos listos en segundos
+          </div>
+
+          <h1>
+            Organiza tus equipos
+            <span>sin complicaciones</span>
+          </h1>
+
+          <p>
+            Crea equipos balanceados o aleatorios, guarda tus listas,
+            organiza jugadores, controla tus sesiones y comparte los
+            resultados desde una sola aplicación.
+          </p>
+
+          <div class="hero-botones">
+            <!-- CAMBIA ESTE ENLACE POR EL DE TU APP -->
+            <a
+              class="boton boton-principal"
+              href="https://play.google.com/store"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              ▶ Obtener en Google Play
+            </a>
+
+            <a class="boton boton-secundario" href="#funciones">
+              Conocer funciones
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <img
+            src="banner-squadmaker.png"
+            alt="Presentación y pantallas de la aplicación SquadMaker"
+          />
+        </div>
+      </div>
+    </section>
+
+    <div class="estadisticas">
+      <div class="contenedor">
+        <div class="estadisticas-grid">
+          <div class="estadistica">
+            <strong>2 a 500</strong>
+            <span>Jugadores por sesión</span>
+          </div>
+
+          <div class="estadistica">
+            <strong>4 modos</strong>
+            <span>Para organizar equipos</span>
+          </div>
+
+          <div class="estadistica">
+            <strong>100 %</strong>
+            <span>Fácil de utilizar</span>
+          </div>
+
+          <div class="estadistica">
+            <strong>Multideporte</strong>
+            <span>Para cualquier actividad</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="funciones" id="funciones">
+      <div class="contenedor">
+        <div class="titulo-seccion">
+          <small>Todo en una sola app</small>
+          <h2>Organiza tus partidos de forma rápida y sencilla</h2>
+          <p>
+            SquadMaker facilita la creación de equipos para partidos,
+            entrenamientos, torneos, actividades escolares y reuniones.
+          </p>
+        </div>
+
+        <div class="funciones-grid">
+          <article class="tarjeta">
+            <div class="icono">👥</div>
+            <h3>Equipos balanceados</h3>
+            <p>
+              Distribuye a tus jugadores de manera práctica para formar
+              equipos organizados y competitivos.
+            </p>
+          </article>
+
+          <article class="tarjeta">
+            <div class="icono">🔀</div>
+            <h3>Mezcla aleatoria</h3>
+            <p>
+              Genera equipos al azar con un solo toque y vuelve a mezclar
+              cuando lo necesites.
+            </p>
+          </article>
+
+          <article class="tarjeta">
+            <div class="icono">📋</div>
+            <h3>Listas guardadas</h3>
+            <p>
+              Guarda, carga y reutiliza tus listas de jugadores para ahorrar
+              tiempo en futuras sesiones.
+            </p>
+          </article>
+
+          <article class="tarjeta">
+            <div class="icono">🏆</div>
+            <h3>Control de sesiones</h3>
+            <p>
+              Conserva un historial de tus emparejamientos y consulta
+              nuevamente los equipos creados.
+            </p>
+          </article>
+
+          <article class="tarjeta">
+            <div class="icono">📤</div>
+            <h3>Comparte resultados</h3>
+            <p>
+              Comparte los equipos con tus amigos, jugadores o compañeros
+              de forma rápida.
+            </p>
+          </article>
+
+          <article class="tarjeta">
+            <div class="icono">🌙</div>
+            <h3>Modo claro y oscuro</h3>
+            <p>
+              Utiliza la aplicación cómodamente de día o de noche con una
+              interfaz moderna y agradable.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="como-funciona" id="como-funciona">
+      <div class="contenedor">
+        <div class="titulo-seccion">
+          <small>Rápido y sencillo</small>
+          <h2>Forma tus equipos en cuatro pasos</h2>
+          <p>
+            No necesitas registros complicados. Solo agrega a tus jugadores,
+            selecciona la configuración y deja que SquadMaker haga el resto.
+          </p>
+        </div>
+
+        <div class="pasos">
+          <article class="paso">
+            <div class="numero">1</div>
+            <h3>Agrega jugadores</h3>
+            <p>
+              Escribe los nombres o carga una lista guardada anteriormente.
+            </p>
+          </article>
+
+          <article class="paso">
+            <div class="numero">2</div>
+            <h3>Configura equipos</h3>
+            <p>
+              Selecciona cuántos jugadores participarán y cuántos habrá por
+              equipo.
+            </p>
+          </article>
+
+          <article class="paso">
+            <div class="numero">3</div>
+            <h3>Genera la mezcla</h3>
+            <p>
+              Crea equipos balanceados o utiliza el modo aleatorio.
+            </p>
+          </article>
+
+          <article class="paso">
+            <div class="numero">4</div>
+            <h3>Guarda o comparte</h3>
+            <p>
+              Conserva la sesión, copia los equipos o comparte los resultados.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="deportes" id="deportes">
+      <div class="contenedor">
+        <div class="titulo-seccion">
+          <small>Una app, muchas posibilidades</small>
+          <h2>Ideal para cualquier deporte o actividad</h2>
+          <p>
+            Utiliza SquadMaker para organizar partidos, entrenamientos,
+            torneos, actividades escolares y reuniones de amigos.
+          </p>
+        </div>
+
+        <div class="deportes-grid">
+          <div class="deporte">
+            <span>⚽</span>
+            Fútbol
+          </div>
+
+          <div class="deporte">
+            <span>🎾</span>
+            Pádel y tenis
+          </div>
+
+          <div class="deporte">
+            <span>🏀</span>
+            Básquetbol
+          </div>
+
+          <div class="deporte">
+            <span>🏐</span>
+            Voleibol
+          </div>
+
+          <div class="deporte">
+            <span>🎮</span>
+            Juegos y equipos
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="contenedor">
+        <div class="cta-caja">
+          <img
+            class="cta-logo"
+            src="logo-squadmaker.png"
+            alt="Logotipo oficial de SquadMaker"
+          />
+
+          <div>
+            <h2>¿Listo para organizar tus próximos equipos?</h2>
+
+            <p>
+              Descarga SquadMaker y crea equipos en segundos. Ideal para
+              jugadores, entrenadores, maestros, organizadores y grupos de
+              amigos.
+            </p>
+
+            <!-- CAMBIA ESTE ENLACE POR EL DE TU APP -->
+            <a
+              class="boton boton-principal"
+              href="https://play.google.com/store"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Descargar SquadMaker
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacto">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-marca">
+            <img src="logo-squadmaker.png" alt="Logo de SquadMaker" />
+            SquadMaker
+          </div>
+
+          <p>
+            Crea equipos balanceados, organiza listas y comparte resultados
+            de manera rápida, sencilla y profesional.
+          </p>
+        </div>
+
+        <div>
+          <h3>Enlaces</h3>
+          <a href="#inicio">Inicio</a>
+          <a href="#funciones">Funciones</a>
+          <a href="#como-funciona">Cómo funciona</a>
+          <a href="#deportes">Deportes</a>
+        </div>
+
+        <div>
+          <h3>Soporte y legal</h3>
+
+          <a href="mailto:josecanseco.c@gmail.com">
+            josecanseco.c@gmail.com
+          </a>
+
+          <a href="privacidad.html">
+            Política de privacidad
+          </a>
+
+          <a href="app-ads.txt">
+            Información publicitaria
+          </a>
+        </div>
+      </div>
+
+      <div class="pie-final">
+        <span>
+          © <span id="anio"></span> SquadMaker. Todos los derechos reservados.
+        </span>
+
+        <span>
+          Diseñado para organizar equipos en segundos.
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("anio").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
