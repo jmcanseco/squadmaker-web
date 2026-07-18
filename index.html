@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
 
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  />
+  >
 
   <meta
     name="description"
-    content="SquadMaker te ayuda a crear equipos balanceados, organizar jugadores, guardar listas y compartir resultados fácilmente."
-  />
+    content="SquadMaker te ayuda a crear equipos, organizar jugadores, administrar torneos y compartir resultados fácilmente."
+  >
 
   <meta
     name="keywords"
-    content="SquadMaker, crear equipos, equipos aleatorios, organizar partidos, pádel, fútbol, voleibol, básquetbol"
-  />
+    content="SquadMaker, crear equipos, torneos, equipos aleatorios, pádel, fútbol, voleibol, básquetbol"
+  >
 
-  <meta name="author" content="SquadMaker" />
+  <meta name="author" content="SquadMaker">
+  <meta name="theme-color" content="#31106c">
 
-  <meta name="theme-color" content="#31106c" />
+  <title>SquadMaker | Organiza equipos y torneos</title>
 
-  <title>SquadMaker | Organiza tus equipos en segundos</title>
-
-  <link rel="icon" type="image/png" href="logo-squadmaker.png" />
+  <link
+    rel="icon"
+    type="image/png"
+    href="logo-squadmaker.png"
+  >
 
   <style>
     :root {
@@ -151,7 +154,11 @@
     }
 
     .boton-principal {
-      background: linear-gradient(135deg, var(--naranja), var(--amarillo));
+      background: linear-gradient(
+        135deg,
+        var(--naranja),
+        var(--amarillo)
+      );
       color: #301354;
       box-shadow: 0 12px 30px rgba(255, 151, 0, 0.3);
     }
@@ -166,9 +173,22 @@
       position: relative;
       padding: 74px 0 64px;
       background:
-        radial-gradient(circle at 10% 15%, rgba(255, 194, 28, 0.25), transparent 24%),
-        radial-gradient(circle at 88% 12%, rgba(38, 148, 237, 0.24), transparent 30%),
-        linear-gradient(135deg, #ffffff 0%, #f7f3ff 55%, #eef8ff 100%);
+        radial-gradient(
+          circle at 10% 15%,
+          rgba(255, 194, 28, 0.25),
+          transparent 24%
+        ),
+        radial-gradient(
+          circle at 88% 12%,
+          rgba(38, 148, 237, 0.24),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #f7f3ff 55%,
+          #eef8ff 100%
+        );
       overflow: hidden;
     }
 
@@ -347,7 +367,11 @@
       display: grid;
       place-items: center;
       border-radius: 18px;
-      background: linear-gradient(135deg, #f0e9ff, #fff3ce);
+      background: linear-gradient(
+        135deg,
+        #f0e9ff,
+        #fff3ce
+      );
       font-size: 1.8rem;
       margin-bottom: 20px;
     }
@@ -403,12 +427,11 @@
     }
 
     .deportes {
-      background:
-        linear-gradient(
-          135deg,
-          rgba(49, 16, 108, 0.98),
-          rgba(75, 27, 139, 0.96)
-        );
+      background: linear-gradient(
+        135deg,
+        rgba(49, 16, 108, 0.98),
+        rgba(75, 27, 139, 0.96)
+      );
       color: var(--blanco);
     }
 
@@ -442,8 +465,16 @@
     .cta {
       padding: 100px 0;
       background:
-        radial-gradient(circle at 15% 20%, rgba(255, 194, 28, 0.25), transparent 25%),
-        linear-gradient(135deg, #f7f2ff, #eef8ff);
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(255, 194, 28, 0.25),
+          transparent 25%
+        ),
+        linear-gradient(
+          135deg,
+          #f7f2ff,
+          #eef8ff
+        );
     }
 
     .cta-caja {
@@ -461,7 +492,9 @@
     .cta-logo {
       max-width: 300px;
       margin: 0 auto;
-      filter: drop-shadow(0 18px 26px rgba(48, 16, 111, 0.18));
+      filter: drop-shadow(
+        0 18px 26px rgba(48, 16, 111, 0.18)
+      );
     }
 
     .cta h2 {
@@ -630,10 +663,15 @@
 </head>
 
 <body>
+
   <header class="barra-superior">
     <div class="contenedor navegacion">
+
       <a href="#inicio" class="marca">
-        <img src="logo-squadmaker.png" alt="Logo de SquadMaker" />
+        <img
+          src="logo-squadmaker.png"
+          alt="Logo de SquadMaker"
+        >
         <span>SquadMaker</span>
       </a>
 
@@ -644,22 +682,25 @@
         <a href="#contacto">Contacto</a>
       </nav>
 
-      <!-- CAMBIA ESTE ENLACE CUANDO TENGAS LA URL DEFINITIVA DE GOOGLE PLAY -->
       <a
         class="boton boton-principal"
-        href="https://play.google.com/store"
+        href="https://play.google.com/store/apps/details?id=com.squadmaker.app"
         target="_blank"
         rel="noopener noreferrer"
       >
         Descargar app
       </a>
+
     </div>
   </header>
 
   <main>
+
     <section class="hero" id="inicio">
       <div class="contenedor hero-contenido">
+
         <div class="hero-texto">
+
           <div class="etiqueta">
             ⚡ Equipos listos en segundos
           </div>
@@ -670,68 +711,80 @@
           </h1>
 
           <p>
-            Crea equipos balanceados o aleatorios, guarda tus listas,
-            organiza jugadores, controla tus sesiones y comparte los
-            resultados desde una sola aplicación.
+            Crea equipos balanceados o aleatorios, organiza torneos,
+            administra jugadores, guarda tus sesiones y comparte
+            fácilmente los resultados.
           </p>
 
           <div class="hero-botones">
-            <!-- CAMBIA ESTE ENLACE POR EL DE TU APP -->
+
             <a
               class="boton boton-principal"
-              href="https://play.google.com/store"
+              href="https://play.google.com/store/apps/details?id=com.squadmaker.app"
               target="_blank"
               rel="noopener noreferrer"
             >
               ▶ Obtener en Google Play
             </a>
 
-            <a class="boton boton-secundario" href="#funciones">
+            <a
+              class="boton boton-secundario"
+              href="#funciones"
+            >
               Conocer funciones
             </a>
+
           </div>
         </div>
 
         <div class="hero-visual">
           <img
             src="banner-squadmaker.png"
-            alt="Presentación y pantallas de la aplicación SquadMaker"
-          />
+            alt="Presentación y pantallas de SquadMaker"
+          >
         </div>
+
       </div>
     </section>
 
     <div class="estadisticas">
       <div class="contenedor">
         <div class="estadisticas-grid">
+
           <div class="estadistica">
-            <strong>2 a 500</strong>
-            <span>Jugadores por sesión</span>
+            <strong>Equipos</strong>
+            <span>Balanceados o aleatorios</span>
           </div>
 
           <div class="estadistica">
             <strong>4 modos</strong>
-            <span>Para organizar equipos</span>
+            <span>Para organizar tus partidas</span>
           </div>
 
           <div class="estadistica">
-            <strong>100 %</strong>
-            <span>Fácil de utilizar</span>
+            <strong>Torneos</strong>
+            <span>Control de partidos y resultados</span>
           </div>
 
           <div class="estadistica">
             <strong>Multideporte</strong>
             <span>Para cualquier actividad</span>
           </div>
+
         </div>
       </div>
     </div>
 
     <section class="funciones" id="funciones">
       <div class="contenedor">
+
         <div class="titulo-seccion">
           <small>Todo en una sola app</small>
-          <h2>Organiza tus partidos de forma rápida y sencilla</h2>
+
+          <h2>
+            Organiza tus partidos y torneos de forma sencilla
+          </h2>
+
           <p>
             SquadMaker facilita la creación de equipos para partidos,
             entrenamientos, torneos, actividades escolares y reuniones.
@@ -739,123 +792,161 @@
         </div>
 
         <div class="funciones-grid">
+
           <article class="tarjeta">
             <div class="icono">👥</div>
+
             <h3>Equipos balanceados</h3>
+
             <p>
-              Distribuye a tus jugadores de manera práctica para formar
-              equipos organizados y competitivos.
+              Distribuye a tus jugadores para formar equipos organizados,
+              equilibrados y competitivos.
             </p>
           </article>
 
           <article class="tarjeta">
             <div class="icono">🔀</div>
-            <h3>Mezcla aleatoria</h3>
-            <p>
-              Genera equipos al azar con un solo toque y vuelve a mezclar
-              cuando lo necesites.
-            </p>
-          </article>
 
-          <article class="tarjeta">
-            <div class="icono">📋</div>
-            <h3>Listas guardadas</h3>
+            <h3>Equipos aleatorios</h3>
+
             <p>
-              Guarda, carga y reutiliza tus listas de jugadores para ahorrar
-              tiempo en futuras sesiones.
+              Genera equipos al azar con un solo toque y vuelve a mezclarlos
+              cuando sea necesario.
             </p>
           </article>
 
           <article class="tarjeta">
             <div class="icono">🏆</div>
-            <h3>Control de sesiones</h3>
+
+            <h3>Modo torneo</h3>
+
             <p>
-              Conserva un historial de tus emparejamientos y consulta
-              nuevamente los equipos creados.
+              Organiza enfrentamientos, registra marcadores y lleva el
+              control de los resultados.
+            </p>
+          </article>
+
+          <article class="tarjeta">
+            <div class="icono">⚡</div>
+
+            <h3>Torneo Express</h3>
+
+            <p>
+              Crea rápidamente una competencia de eliminación directa para
+              jugar sin configuraciones complicadas.
+            </p>
+          </article>
+
+          <article class="tarjeta">
+            <div class="icono">🔄</div>
+
+            <h3>Todos contra todos</h3>
+
+            <p>
+              Genera enfrentamientos para que todos los equipos puedan jugar
+              entre sí.
             </p>
           </article>
 
           <article class="tarjeta">
             <div class="icono">📤</div>
+
             <h3>Comparte resultados</h3>
+
             <p>
-              Comparte los equipos con tus amigos, jugadores o compañeros
-              de forma rápida.
+              Comparte equipos, partidos y resultados con tus amigos o
+              compañeros.
             </p>
           </article>
 
-          <article class="tarjeta">
-            <div class="icono">🌙</div>
-            <h3>Modo claro y oscuro</h3>
-            <p>
-              Utiliza la aplicación cómodamente de día o de noche con una
-              interfaz moderna y agradable.
-            </p>
-          </article>
         </div>
       </div>
     </section>
 
-    <section class="como-funciona" id="como-funciona">
+    <section
+      class="como-funciona"
+      id="como-funciona"
+    >
       <div class="contenedor">
+
         <div class="titulo-seccion">
           <small>Rápido y sencillo</small>
-          <h2>Forma tus equipos en cuatro pasos</h2>
+
+          <h2>
+            Organiza tu partida en cuatro pasos
+          </h2>
+
           <p>
-            No necesitas registros complicados. Solo agrega a tus jugadores,
-            selecciona la configuración y deja que SquadMaker haga el resto.
+            Agrega jugadores, selecciona el modo de juego y deja que
+            SquadMaker haga el resto.
           </p>
         </div>
 
         <div class="pasos">
+
           <article class="paso">
             <div class="numero">1</div>
+
             <h3>Agrega jugadores</h3>
+
             <p>
-              Escribe los nombres o carga una lista guardada anteriormente.
+              Escribe los nombres de todas las personas que participarán.
             </p>
           </article>
 
           <article class="paso">
             <div class="numero">2</div>
-            <h3>Configura equipos</h3>
+
+            <h3>Selecciona el modo</h3>
+
             <p>
-              Selecciona cuántos jugadores participarán y cuántos habrá por
-              equipo.
+              Elige equipos aleatorios, torneo, Torneo Express o todos contra
+              todos.
             </p>
           </article>
 
           <article class="paso">
             <div class="numero">3</div>
-            <h3>Genera la mezcla</h3>
+
+            <h3>Genera los equipos</h3>
+
             <p>
-              Crea equipos balanceados o utiliza el modo aleatorio.
+              SquadMaker organiza automáticamente a todos los participantes.
             </p>
           </article>
 
           <article class="paso">
             <div class="numero">4</div>
-            <h3>Guarda o comparte</h3>
+
+            <h3>Juega y comparte</h3>
+
             <p>
-              Conserva la sesión, copia los equipos o comparte los resultados.
+              Registra resultados, guarda la sesión y comparte la información.
             </p>
           </article>
+
         </div>
       </div>
     </section>
 
     <section class="deportes" id="deportes">
       <div class="contenedor">
+
         <div class="titulo-seccion">
           <small>Una app, muchas posibilidades</small>
-          <h2>Ideal para cualquier deporte o actividad</h2>
+
+          <h2>
+            Ideal para cualquier deporte o actividad
+          </h2>
+
           <p>
             Utiliza SquadMaker para organizar partidos, entrenamientos,
-            torneos, actividades escolares y reuniones de amigos.
+            torneos y reuniones con amigos.
           </p>
         </div>
 
         <div class="deportes-grid">
+
           <div class="deporte">
             <span>⚽</span>
             Fútbol
@@ -878,66 +969,98 @@
 
           <div class="deporte">
             <span>🎮</span>
-            Juegos y equipos
+            Juegos y actividades
           </div>
+
         </div>
       </div>
     </section>
 
     <section class="cta">
       <div class="contenedor">
+
         <div class="cta-caja">
+
           <img
             class="cta-logo"
             src="logo-squadmaker.png"
             alt="Logotipo oficial de SquadMaker"
-          />
+          >
 
           <div>
-            <h2>¿Listo para organizar tus próximos equipos?</h2>
+            <h2>
+              ¿Listo para organizar tus próximos equipos?
+            </h2>
 
             <p>
-              Descarga SquadMaker y crea equipos en segundos. Ideal para
-              jugadores, entrenadores, maestros, organizadores y grupos de
-              amigos.
+              Descarga SquadMaker y crea equipos, torneos y enfrentamientos
+              en segundos.
             </p>
 
-            <!-- CAMBIA ESTE ENLACE POR EL DE TU APP -->
             <a
               class="boton boton-principal"
-              href="https://play.google.com/store"
+              href="https://play.google.com/store/apps/details?id=com.squadmaker.app"
               target="_blank"
               rel="noopener noreferrer"
             >
               Descargar SquadMaker
             </a>
+
           </div>
         </div>
       </div>
     </section>
+
   </main>
 
   <footer id="contacto">
     <div class="contenedor">
+
       <div class="footer-grid">
+
         <div>
           <div class="footer-marca">
-            <img src="logo-squadmaker.png" alt="Logo de SquadMaker" />
+
+            <img
+              src="logo-squadmaker.png"
+              alt="Logo de SquadMaker"
+            >
+
             SquadMaker
           </div>
 
           <p>
-            Crea equipos balanceados, organiza listas y comparte resultados
-            de manera rápida, sencilla y profesional.
+            Crea equipos, organiza torneos y comparte resultados de una forma
+            rápida, sencilla y profesional.
           </p>
         </div>
 
         <div>
           <h3>Enlaces</h3>
-          <a href="#inicio">Inicio</a>
-          <a href="#funciones">Funciones</a>
-          <a href="#como-funciona">Cómo funciona</a>
-          <a href="#deportes">Deportes</a>
+
+          <a href="#inicio">
+            Inicio
+          </a>
+
+          <a href="#funciones">
+            Funciones
+          </a>
+
+          <a href="#como-funciona">
+            Cómo funciona
+          </a>
+
+          <a href="#deportes">
+            Deportes
+          </a>
+
+          <a
+            href="https://play.google.com/store/apps/details?id=com.squadmaker.app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Descargar en Google Play
+          </a>
         </div>
 
         <div>
@@ -955,16 +1078,20 @@
             Información publicitaria
           </a>
         </div>
+
       </div>
 
       <div class="pie-final">
+
         <span>
-          © <span id="anio"></span> SquadMaker. Todos los derechos reservados.
+          © <span id="anio"></span> SquadMaker.
+          Todos los derechos reservados.
         </span>
 
         <span>
           Diseñado para organizar equipos en segundos.
         </span>
+
       </div>
     </div>
   </footer>
@@ -973,5 +1100,6 @@
     document.getElementById("anio").textContent =
       new Date().getFullYear();
   </script>
+
 </body>
 </html>
